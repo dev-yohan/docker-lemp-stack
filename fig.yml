@@ -1,7 +1,10 @@
-web:
+memcached: 
+  build: build-files/memcached
+  ports: 
+    - "3000:11211"
+web: 
   build: build-files/nginx
-  ports:
-  - "8082:80"
-
-
-
+  links:
+   - memcached
+  ports: 
+    - "8082:80"
