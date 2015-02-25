@@ -2,9 +2,20 @@ memcached:
   build: build-files/memcached
   ports: 
     - "3000:11211"
+solr:
+  build: build-files/solr
+  ports:
+   - "8412:8983"
+mysql:
+  build: build-files/mysql
+  ports:
+   - "3306:3306"
+  command: /usr/local/bin/start-database.sh 
 web: 
   build: build-files/nginx
   links:
    - memcached
+   - solr
+   - mysql
   ports: 
     - "8082:80"
